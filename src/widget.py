@@ -3,17 +3,18 @@ from src.masks import get_mask_account, get_mask_card_number
 
 def mask_account_card(account_info: str) -> str:
     """Маскирует номер карты или счета, представленного в виде строки."""
-
-    parts = account_info.split()  # Делим входящюю информацию на части
-    account_type = " ".join(parts[:-1])  # Объединяем все слова, кроме последнего
-    account_number = parts[-1]
-    if account_info.startswith("Счет"):
-        masked_account = get_mask_account(account_number)
-        return f"Счет {masked_account}"
-    else:
-        card_number = account_number
-        masked_card = get_mask_card_number(card_number)
-        return f"{account_type} {masked_card}"
+    if account_info:
+        parts = account_info.split()  # Делим входящюю информацию на части
+        account_type = " ".join(parts[:-1])  # Объединяем все слова, кроме последнего
+        account_number = parts[-1]
+        if account_info.startswith("Счет"):
+            masked_account = get_mask_account(account_number)
+            return f"Счет {masked_account}"
+        else:
+            card_number = account_number
+            masked_card = get_mask_card_number(card_number)
+            return f"{account_type} {masked_card}"
+    return "Некорректный номер"
 
 
 def get_date(format_data: str) -> str:
