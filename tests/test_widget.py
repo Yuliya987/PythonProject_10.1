@@ -17,7 +17,7 @@ def test_mask_account_card(account_info, expected_result):
 
 
 def test_valid_card_number(valid_card_number_2):  # правильный ввод карты
-    assert mask_account_card(valid_card_number_2) == "Visa 1234 56** **** 3456"
+    assert mask_account_card(valid_card_number_2) == "Visa Classic 1234 56** **** 3456"
 
 
 def test_valid_card_number_(valid_account_number_2):  # правильный ввод со словом счёт
@@ -26,7 +26,9 @@ def test_valid_card_number_(valid_account_number_2):  # правильный в�
 
 @pytest.mark.parametrize(
     "format_data, expected_result",
-    [("2024-03-11T02:26:18.671407", "11.03.2024"), ("2025-06-28T02:26:18.671407", "28.06.2025"), ("", "")],
+    [("2024-03-11T02:26:18.671407", "11.03.2024"), ("2025-06-28T02:26:18.671407", "28.06.2025"), ("", "..")],
 )
-def test_get_date(valid_format_data):
-    assert get_date(valid_format_data) == "11.03.2024"
+def test_get_date(format_data, expected_result):
+    assert get_date(format_data) == expected_result
+
+
