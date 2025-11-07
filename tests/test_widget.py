@@ -30,5 +30,3 @@ def test_valid_card_number_(valid_account_number_2):  # правильный в�
 )
 def test_get_date(format_data, expected_result):
     assert get_date(format_data) == expected_result
-
-
