@@ -5,7 +5,7 @@
 * Автор: Кириленко Юлия
 * *stanislavovnajuli987@gmail.com*
 
-+ [ссылка на проект] (https://github.com/Yuliya987/PythonProject/tree/feature_11_1)
++ [ссылка на проект] (https://github.com/Yuliya987/PythonProject.git)
 
 #
 ## Установка:
