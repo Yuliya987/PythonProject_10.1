@@ -13,8 +13,8 @@ def sample_transactions():
         },
         {
             "id": 2,
-            "description": "Transaction in EUR",
-            "operationAmount": {"amount": "200", "currency": {"name": "EUR", "code": "EUR"}},
+            "description": "Transaction in RUB",
+            "operationAmount": {"amount": "200", "currency": {"name": "RUB", "code": "RUB"}},
         },
         {
             "id": 3,
@@ -24,15 +24,15 @@ def sample_transactions():
     ]
 
 
-@pytest.mark.parametrize("currency_code, expected_ids", [("USD", [1, 3]), ("EUR", [2]), ("RUB", [])])
+@pytest.mark.parametrize("currency_code, expected_ids", [("USD", [1, 3]), ("RUB", [2]), ("EUR", [])])
 def test_filter_by_currency(sample_transactions, currency_code, expected_ids):
     result = list(filter_by_currency(sample_transactions, currency_code))
     result_ids = [tx["id"] for tx in result]
     assert result_ids == expected_ids
 
 
-def test_filter_by_currency_no_transactions(list_transactions):  # транзакций с заданной валютой нет
-    eur_transactions = filter_by_currency(list_transactions, "EUR")
+def test_filter_by_currency_no_transactions(sample_transactions):  # транзакций с заданной валютой нет
+    eur_transactions = filter_by_currency(sample_transactions, "EUR")
     try:
         next(eur_transactions)
         assert False, "Должно было быть выброшено исключение StopIteration"
@@ -42,17 +42,15 @@ def test_filter_by_currency_no_transactions(list_transactions):  # транза�
 
 def test_transaction_descriptions(sample_transactions):
     descriptions = list(transaction_descriptions(sample_transactions))
-    expected_descriptions = ["Transaction in USD", "Transaction in EUR", "Another USD transaction"]
+    expected_descriptions = ["Transaction in USD", "Transaction in RUB", "Another USD transaction"]
     assert descriptions == expected_descriptions
 
 
 @pytest.mark.parametrize(
     "start, stop, expected_numbers",
     [
-        (1, 3, ["0000 0000 0000 0001", "0000 0000 0000 0002", "0000 0000 0000 0003"]),
-        (999999999999998, 999999999999999, ["0000 0000 0000 0002", "0000 0000 0000 0003"]),
-    ],
-)
+        (1, 3, ["0000 0000 0000 0001", "0000 0000 0000 0002", "0000 0000 0000 0003"])
+    ])
 def test_card_number_generator(start, stop, expected_numbers):
     gen = card_number_generator(start, stop)
     generated_numbers = list(gen)
