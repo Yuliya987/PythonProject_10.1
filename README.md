@@ -5,7 +5,7 @@
 * Автор: Кириленко Юлия
 * *stanislavovnajuli987@gmail.com*
 
-+ [ссылка на проект] (https://github.com/Yuliya987/PythonProject_10.1.git)
++ [ссылка на проект] (https://github.com/Yuliya987/PythonProject.git)
 
 #
 ## Установка:
@@ -31,6 +31,9 @@ pip install -r requirements.txt
 `
 ). Для блочного кода используются три обратные кавычки (
 ```
+##Функции: 
+Добавлены функции-генераторы для обработки данных карт, транзакций и валюты
+
 ##Тестирование:
 @pytest
 
