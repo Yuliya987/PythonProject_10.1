@@ -1,3 +1,4 @@
+from src.decorators import log
 from src.generators import filter_by_currency, transaction_descriptions
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
@@ -74,3 +75,6 @@ currency = "USD"
 filter_by_currency(transactions, currency)
 
 transaction_descriptions(transactions)
+
+filename = "mylog.txt"
+log(filename)
