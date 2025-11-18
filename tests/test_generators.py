@@ -47,10 +47,8 @@ def test_transaction_descriptions(sample_transactions):
 
 
 @pytest.mark.parametrize(
-    "start, stop, expected_numbers",
-    [
-        (1, 3, ["0000 0000 0000 0001", "0000 0000 0000 0002", "0000 0000 0000 0003"])
-    ])
+    "start, stop, expected_numbers", [(1, 3, ["0000 0000 0000 0001", "0000 0000 0000 0002", "0000 0000 0000 0003"])]
+)
 def test_card_number_generator(start, stop, expected_numbers):
     gen = card_number_generator(start, stop)
     generated_numbers = list(gen)
