@@ -11,7 +11,7 @@ def test_log_2(capsys):
     assert "my_function ok" in captured.out
 
 
-def test_log():
+def test_log(x,y):
     @log(filename="mylog.txt")
     def my_function(x, y):
         return x + y
