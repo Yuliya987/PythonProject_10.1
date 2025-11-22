@@ -3,10 +3,8 @@ from src.decorators import log
 
 def test_log_2(capsys):
     @log(None)
-    def my_function():
-        result = my_function()
-        assert result == "Expected Result"
-        return result
+    def my_function(x, y):
+        return x + y
 
 
     my_function(1, 2)
@@ -16,12 +14,10 @@ def test_log_2(capsys):
 
 def test_log():
     @log(filename="mylog.txt")
-    def my_function():
-        result = my_function()
-        assert result == "Expected Result"
-        return result
+    def my_function(x, y):
+        return x + y
 
-    my_function()
+    my_function(1, 2)
     with open("mylog.txt", "a") as file:
         log_content = file.read()
 
