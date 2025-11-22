@@ -1,7 +1,7 @@
 from time import time
 
 
-def log(filename):
+def log(filename="mylog.txt"):
     """Внешняя функция принимает элементы функции и возвращает декоратор"""
 
     def decorator(func):
