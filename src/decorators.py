@@ -6,7 +6,6 @@ def log(filename="mylog.txt"):
 
     def decorator(func):
         """Принимает функцию, возвращает обертку"""
-
         def wrapper(*args, **kwargs):
             """Функция-обертка"""
             if filename is None:
