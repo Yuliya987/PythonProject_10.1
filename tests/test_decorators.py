@@ -18,7 +18,7 @@ def test_log():
         return x + y
 
     my_function(1, 2)
-    with open("mylog.txt", "a") as file:
+    with open("mylog.txt") as file:
         log_content = file.read()
 
     assert "my_function ok" in log_content
