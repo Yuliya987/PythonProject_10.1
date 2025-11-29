@@ -1,21 +1,21 @@
 import json
-from typing import Any, List
+import os
+from typing import List, Any
 
 
 def read_json_operation(path: str) -> Any:
     """Функция возвращает список словарей с данными о финансовых транзакциях"""
+    if not os.path.exists(path):
+        return []
     try:
-        with open(path, encoding="utf-8") as f:
+        with open(path, 'r', encoding="utf-8") as f:
             data = json.load(f)
 
-            if not isinstance(data, List):
-                return []
-            return data
-    except FileNotFoundError:
-        print("Файл не найден")
-        return []
-    except json.JSONDecodeError:
-        print("Ошибка декодирования файла")
+            if isinstance(data, List):
+                return data
+
+    except (json.JSONDecodeError, IOError):
+
         return []
 
 
