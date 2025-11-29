@@ -11,6 +11,7 @@ API_KEY = os.getenv('API_KEY')
 def transaction_info(transaction_list):
     """Функция, принимающая транзакцию и возвращающая сумму транзакции в рублях"""
 
+    global response
     for i in transaction_list:
 
         if i["operationAmount"]["currency"]["code"] == "RUB":
@@ -18,6 +19,6 @@ def transaction_info(transaction_list):
 
         if i["operationAmount"]["currency"]["code"] != 'RUB':
             response = requests.get(
-                f"https://api.apilayer.com/exchangerates_data/convert?to=i,{["operationAmount"]},{["currency"]},{["code"]}&from=i{["operationAmount"]},{["currency"]},{["code"]}&=i{["operationAmount"]},{["amount"]} - {API_KEY}")  # noqa:E501
+                f"https://api.apilayer.com/exchangerates_data/convert?to=i,{i["operationAmount"], ["currency"], ["code"]}&from=i{["operationAmount"], ["currency"], ["code"]}&=i{["operationAmount"], ["amount"]} - {API_KEY}")  # noqa:E501
 
         return response.json()
