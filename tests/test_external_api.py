@@ -6,7 +6,7 @@ from src.external_api import currency_conversion
 
 
 @patch('requests.get')
-def currency_conversion(mock_get):
+def Test_currency_conversion(mock_get):
     transaction_usd = [{"id": 41428829,
                        "state": "EXECUTED",
                        "date": "2019-07-03T18:35:29.512364",
