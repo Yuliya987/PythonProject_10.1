@@ -22,15 +22,15 @@ def currency_conversion(transaction):
 
         return response.json()'''
 
-    url = "https://api.apilayer.com/currency_data/convert"
-
     operation_amount = transaction["operationAmount"]
 
     currency_info = operation_amount["currency"]
     currency_code = currency_info["code"]
     amount_value = operation_amount["amount"]
 
-    payload = {"amount": 100, "from": "USD", "to": "RUB"}
+    url = f"https://api.apilayer.com/currency_data/convert?to=RUB&from={currency_code}&amount={amount_value}"
+
+    payload = {}
     headers = {"apikey": API_KEY}
 
     try:
