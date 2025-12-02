@@ -29,9 +29,10 @@ def list_dict_1():
         {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
     ]
 
+
 @pytest.fixture
 def transaction_usd():
-    return  {
+    return {
         "id": 41428829,
         "state": "EXECUTED",
         "date": "2019-07-03T18:35:29.512364",
@@ -40,5 +41,3 @@ def transaction_usd():
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560",
     }
-
-

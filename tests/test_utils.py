@@ -1,14 +1,34 @@
 import json
+from unittest.mock import mock_open
+
+import pytest
+import requests
+
+from src.utils import read_json_operation
 
 
-def test_read_json_operation(tmp_path):
-    test_file = tmp_path / "test_file_json"
+@pytest.fixture
+def sample_data():
+    return [{"id": 1, "amount": 100}, {"id": 2, "amount": 200}]
 
-    data = {"key": "value", "number": 123}
-    with open(test_file, "w") as f:
-        json.dump(data, f)
 
-    with open(test_file, "r") as f:
-        read_data = json.load(f)
+def test_file_not_exists():
+    with requests.patch("os.path.exists", return_value=False):
+        result = read_json_operation("non_existent.json")
+        assert result == []
 
-    assert read_data == data
+
+def test_successful_read(sample_data):
+    with requests.patch("os.path.exists", return_value = True):
+        with requests.patch("builtins.open", mock_open(read_data=json.dumps(sample_data))):
+            with requests.patch("json.load", return_value = sample_data):
+                result = read_json_operation("data.json")
+                assert result == sample_data
+
+
+def test_json_decode_error():
+    with requests.patch("os.path.exists", return_value = True):
+        with requests.patch("builtins.open", mock_open(read_data="invalid")):
+            with requests.patch("json.load", side_effect=json.JSONDecodeError("Error", "doc", 0)):
+                result = read_json_operation("data.json")
+                assert result == []
