@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv('API_KEY')
+API_KEY = os.getenv("API_KEY")
 
 
 def currency_conversion(transaction):
     """Функция конвертирует сумму транзакции в сумму рублях"""
 
-    '''for a in transaction_list:
+    """for a in transaction_list:
 
         if a["operationAmount"]["currency"]["code"] == "RUB":
             return a["operationAmount"]["amount"]
@@ -20,7 +20,7 @@ def currency_conversion(transaction):
             response = requests.get(
                 f"https://api.apilayer.com/exchangerates_data/convert?to={a["operationAmount"], ["currency"], ["code"]}&from=a{["operationAmount"], ["currency"], ["code"]}&=a{["operationAmount"], ["amount"]} - {API_KEY}")  # noqa:E501
 
-        return response.json()'''
+        return response.json()"""
 
     operation_amount = transaction["operationAmount"]
 
@@ -34,12 +34,12 @@ def currency_conversion(transaction):
     headers = {"apikey": API_KEY}
 
     try:
-        response = requests.request("GET", url, headers=headers, data=payload)
+        response = requests.get(url, headers=headers, data=payload)
         if response.status_code == 200:
             result = response.json()
             conversion_result = result.get("result")
             if conversion_result is not None:
                 return float(conversion_result)
         return None
-    except requests.exceptation.RequestExceptation:
+    except requests.RequestException:
         return None

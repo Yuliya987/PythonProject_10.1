@@ -4,7 +4,7 @@ from src.external_api import currency_conversion
 from typing import List, Any
 
 from dotenv.main import logger
-from jaraco.functools import except_
+
 from requests import Response
 
 
@@ -13,7 +13,7 @@ def read_json_operation(path: str) -> Any:
     if not os.path.exists(path):
         return []
     try:
-        with open(path, 'r', encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
             if isinstance(data, List):
@@ -23,7 +23,8 @@ def read_json_operation(path: str) -> Any:
 
         return []
 
-def get_transaction_amount(transaction: dict[str, Any])-> float| None| Response |Any:
+
+def get_transaction_amount(transaction: dict[str, Any]) -> float | None | Response | Any:
     """Возвращает сумму транзакции в рублях"""
     logger.debug("Starting transaction amount processing")
 
@@ -60,4 +61,5 @@ def get_transaction_amount(transaction: dict[str, Any])-> float| None| Response 
         logger.error(ex)
         return 0.0
 
-print(json.dumps(read_json_operation('C:/Users/Admin/PycharmProjects/PythonProject/PyProject/data/operations.json')))
+
+print(json.dumps(read_json_operation("C:/Users/Admin/PycharmProjects/PythonProject/PyProject/data/operations.json")))

@@ -6,7 +6,6 @@ def test_log_2(capsys):
     def my_function(x, y):
         return x + y
 
-
     my_function(1, 2)
     captured = capsys.readouterr()
     assert "my_function ok" in captured.out
