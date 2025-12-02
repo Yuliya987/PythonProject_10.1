@@ -1,8 +1,8 @@
 from unittest.mock import patch
 
-from src.external_api import currency_conversion
-
 import requests
+
+from src.external_api import currency_conversion
 
 
 @patch("requests.get")
@@ -15,7 +15,8 @@ def test_currency_conversion(mock_get, transaction_usd):
     result = currency_conversion(transaction_usd)
     assert result is None
 
+
 @patch("requests.get", side_effect=requests.RequestException)
-def test_exception(mock_get, transaction_usd):
+def test_exception(transaction_usd):
     result = currency_conversion(transaction_usd)
     assert result is None
