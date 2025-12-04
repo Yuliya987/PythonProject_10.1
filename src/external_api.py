@@ -11,7 +11,6 @@ API_KEY = os.getenv("API_KEY")
 def currency_conversion(transaction):
     """Функция конвертирует сумму транзакции в сумму рублях"""
 
-
     operation_amount = transaction["operationAmount"]
 
     currency_info = operation_amount["currency"]
