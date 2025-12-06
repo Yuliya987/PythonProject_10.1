@@ -1,28 +1,20 @@
 import csv
-from typing import Any
+from typing import Any, List, Dict
 
 import pandas as pd
 
 file_path_csv = "C:/Users/Admin/PycharmProjects/PythonProject/transactions.csv"
 
 
-def csv_transaction(file_path_csv: str) -> Any:
+def csv_transaction(file_path_csv: str) -> List[Dict[str, Any]]:
     """Функция для чтения csv-файла, выдает список словарей с транзакциями"""
     try:
         with open("transactions.csv") as file:
             reader = csv.DictReader(file, delimiter=";")
+            transactions = []
             for row in reader:
-                print(
-                    row["id"],
-                    row["state"],
-                    row["date"],
-                    row["amount"],
-                    row["currency_name"],
-                    row["currency_code"],
-                    row["from"],
-                    row["to"],
-                    row["description"],
-                )
+                transactions.append(row)
+            return transactions
     except FileNotFoundError:
         return []
 
@@ -30,10 +22,11 @@ def csv_transaction(file_path_csv: str) -> Any:
 file_path = "C:/Users/Admin/PycharmProjects/PythonProject/transactions_excel.xlsx"
 
 
-def excel_transaction(file_path: str) -> Any:
+def excel_transaction(file_path: str) -> List[Dict[str, Any]]:
     """Функция для чтения Excel-файла, выдает список словарей с транзакциями"""
     try:
-        excel_data = pd.read_excel("transactions_excel.xlsx", sheet_name=None)
+        excel_data = pd.read_excel(file_path)
+        transaction_list = excel_data.to_dict(orient='records')
+        return transaction_list
     except FileNotFoundError:
         return []
-    return excel_data
