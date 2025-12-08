@@ -26,7 +26,7 @@ def excel_transaction(file_path: str) -> List[Dict[str, Any]]:
     """Функция для чтения Excel-файла, выдает список словарей с транзакциями"""
     try:
         excel_data = pd.read_excel(file_path)
-        transaction_list = excel_data.to_dict(orient='records')
+        transaction_list = excel_data.to_dict(orient="records")
         return transaction_list
     except FileNotFoundError:
         return []
