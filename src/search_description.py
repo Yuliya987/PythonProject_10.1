@@ -1,39 +1,27 @@
 import re
-
-from main import transactions
-
-
-
-'''def process_bank_search(data:list[dict], search:str)->list[dict]:
-    """Функция фильтрует словари по состоянию операции: выполнена/отменена"""
-
-    for d in data:
-        try:
-            pattern = re.compile(r"EXECUTED")
-            re.findall(pattern, search, flags=0)
-            matches = pattern.search(d)
-            return matches
-        except Exception as e:
-            return e'''
+from typing import Any
+from collections import Counter
 
 
-def process_bank_search(operations:list[dict], search:str)->list[dict]:
+def process_bank_search(transactions:list[dict], search:str)->list[dict]:
     """
-    Фильтрует список операций по наличию подстроки в описании.
-
-    :param operations: список словарей с банковскими операциями
-    :param search: строка для поиска в описании операций
-    :return: отфильтрованный список операций
-    """
+    Фильтрует список операций по наличию подстроки в описании."""
     pattern = re.compile(search, re.IGNORECASE)
 
-    filtered_operations = [
-        op for op in operations
+    filtered_transactions = [
+        op for op in transactions
         if pattern.search(op['description'])
     ]
+    return filtered_transactions
 
-    return filtered_operations
 
+def process_bank_operations(transactions:list[dict], categories:list)->dict
+    counter = Counter()
+    for op in transactions
+        category = op.get('description', '').strip()
+        if category in categories:
+            counter[category] += 1
+    return dict(counter)
 
 # Пример использования:
 operations = [
