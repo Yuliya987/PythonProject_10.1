@@ -1,6 +1,5 @@
 import csv
 from typing import Any, List, Dict
-import openpyxl
 
 import pandas as pd
 
@@ -8,7 +7,7 @@ file_path_csv = "C:/Users/Admin/PycharmProjects/PythonProject/transactions.csv"
 
 
 def csv_transaction(file_path_csv: str) -> List[Dict[str, Any]]:
-    """Функция для чтения csv-файла, выдает список словарей с транзакциями"""
+    """Для обработки выбран CSV-файл"""
     try:
         with open("transactions.csv") as file:
             reader = csv.DictReader(file, delimiter=";")
@@ -24,7 +23,7 @@ file_path = "C:/Users/Admin/PycharmProjects/PythonProject/transactions_excel.xls
 
 
 def excel_transaction(file_path: str) -> List[Dict[str, Any]]:
-    """Функция для чтения Excel-файла, выдает список словарей с транзакциями"""
+    """Для обработки выбран Excel-файл"""
     try:
         excel_data = pd.read_excel(file_path)
         transaction_list = excel_data.to_dict(orient="records")

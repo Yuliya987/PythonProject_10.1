@@ -12,7 +12,7 @@ logger.setLevel(logging.DEBUG)
 
 
 def read_json_operation(path: str) -> Any:
-    """Функция возвращает список словарей с данными о финансовых транзакциях"""
+    """Для обработки выбран JSON-файл"""
     if not os.path.exists(path):
         return []
     try:
