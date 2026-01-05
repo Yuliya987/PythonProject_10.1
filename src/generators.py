@@ -3,9 +3,11 @@ from typing import Dict, Iterator, List
 
 def filter_by_currency(list_transactions: List, currency: str) -> Iterator:
     """Функция возвращает итератор по операциям по заданной валюте"""
-    for transaction in (t for t in list_transactions if t["operationAmount"]["currency"]["name"] == currency):
-        yield transaction
-
+    c_generator = (
+        transaction
+        for transaction in list_transactions if transaction.get("currency_code", {}) == currency
+    )
+    return c_generator
 
 def transaction_descriptions(transactions: List[Dict]) -> Iterator:
     """Генератор, возвращающий описание каждой транзакции."""

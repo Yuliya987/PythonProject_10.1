@@ -58,7 +58,6 @@ def main():
     user_input: bool = input().lower() == "да"
     if user_input:
         transaction = filter_by_currency(transaction, "RUB")
-    print(transaction)
 
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет ")
     user_input: bool = input().lower() == "да"
@@ -76,15 +75,15 @@ def main():
         amount = trans.get("amount")
         currency_name = trans.get("currency_name")
         currency_code = trans.get("currency_code")
-        to_from = " -> " + mask_account_card(trans.get("from")) if isinstance(trans.get("from"), str) else None
+        to_from = trans.get("from") if isinstance(trans.get("from"), str) else None
         to = mask_account_card(trans.get("to")) if trans.get("to") else None
         description = trans.get("description")
 
-    out_print = f"{date} {description}"
-    summ_print = f"Сумма: {amount} {currency_name}"
-    check_to = f"{to}"
-    check_from = " -> " + mask_account_card(to_from) if to_from else ""
-    print(f"{out_print}\n{check_to}{check_from}\n{summ_print}")
+        out_print = f"{date} {description}"
+        summ_print = f"Сумма: {amount} {currency_name}"
+        check_to = f"{to}"
+        check_from = " -> " + mask_account_card(to_from) if to_from else ""
+        print(f"{out_print}\n{check_to}{check_from}\n{summ_print}")
 
 
 if __name__ == "__main__":

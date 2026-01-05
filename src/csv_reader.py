@@ -2,6 +2,7 @@ import csv
 from typing import Any, List, Dict
 
 import pandas as pd
+from pandas import DataFrame
 
 file_path_csv = "C:/Users/Admin/PycharmProjects/PythonProject/transactions.csv"
 
@@ -25,7 +26,8 @@ file_path = "C:/Users/Admin/PycharmProjects/PythonProject/transactions_excel.xls
 def excel_transaction(file_path: str) -> List[Dict[str, Any]]:
     """Для обработки выбран Excel-файл"""
     try:
-        excel_data = pd.read_excel(file_path)
+        excel_data: DataFrame = pd.read_excel(file_path)
+        excel_data.notnull()
         transaction_list = excel_data.to_dict(orient="records")
         return transaction_list
     except FileNotFoundError:
