@@ -19,6 +19,7 @@ status = ["EXECUTED", "CANCELED", "PENDING"]
 
 
 def main():
+    """Функция, которая отвечает за основную логику проекта"""
     while True:
         print(
             "Привет! Привет! Добро пожаловать в программу работы с банковскими транзакциями."
@@ -41,7 +42,7 @@ def main():
               )
         user_input_status: str = input().upper()
         if user_input_status in status:
-            transaction1 = filter_by_state(transaction, user_input_status)
+            transaction = filter_by_state(transaction, user_input_status)
             print(f"Операции отфильтрованы по статусу {user_input_status}")
             break
         else:
@@ -70,11 +71,9 @@ def main():
     print(f"Всего банковских операций в выборке: {len(transaction)}")
 
     for trans in transaction:
-        state = trans.get("state")
         date = get_date(trans.get("date"))
         amount = trans.get("amount")
         currency_name = trans.get("currency_name")
-        currency_code = trans.get("currency_code")
         to_from = trans.get("from") if isinstance(trans.get("from"), str) else None
         to = mask_account_card(trans.get("to")) if trans.get("to") else None
         description = trans.get("description")
