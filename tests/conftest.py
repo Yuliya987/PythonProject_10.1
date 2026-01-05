@@ -41,3 +41,13 @@ def transaction_usd():
         "from": "MasterCard 7158300734726758",
         "to": "Счет 35383033474447895560",
     }
+
+
+@pytest.fixture
+def transactions_1():
+    return [
+        {'description': 'Пополнение счета на 1000 рублей', 'id': 1},
+        {'description': 'Снятие 5000 с карты', 'id': 2},
+        {'description': 'Перевод на счет 2000', 'id': 3 },
+        {'description': 'Оплата услуг связи', 'id': 4}
+    ]
