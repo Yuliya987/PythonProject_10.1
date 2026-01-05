@@ -1,10 +1,11 @@
 import csv
+from pathlib import Path
 from typing import Any, List, Dict
 
 import pandas as pd
 from pandas import DataFrame
 
-file_path_csv = "C:/Users/Admin/PycharmProjects/PythonProject/transactions.csv"
+file_path_csv = "C:/Users/Admin/PycharmProjects/PythonProject/data/transactions.csv"
 
 
 def csv_transaction(file_path_csv: str) -> List[Dict[str, Any]]:
@@ -12,10 +13,8 @@ def csv_transaction(file_path_csv: str) -> List[Dict[str, Any]]:
     try:
         with open("transactions.csv") as file:
             reader = csv.DictReader(file, delimiter=";")
-            transactions = []
-            for row in reader:
-                transactions.append(row)
-            return transactions
+
+            return list(reader)
     except FileNotFoundError:
         return []
 
