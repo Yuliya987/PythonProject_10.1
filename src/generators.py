@@ -9,6 +9,7 @@ def filter_by_currency(list_transactions: List, currency: str) -> Iterator:
     )
     return c_generator
 
+
 def transaction_descriptions(transactions: List[Dict]) -> Iterator:
     """Генератор, возвращающий описание каждой транзакции."""
     for transaction in transactions:
