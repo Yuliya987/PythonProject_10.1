@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).parent.resolve()
 dict_file = {1: read_json_operation, 2: csv_transaction, 3: excel_transaction}
 path_file = {1: BASE_DIR / 'data' / 'operations.json',
              2: BASE_DIR / 'data' / 'transactions.csv',
-             3: BASE_DIR / 'data' / 'transactions_excel.xls'}
+             3: BASE_DIR / 'data' / 'transactions_excel.xlsx'}
 
 status = ["EXECUTED", "CANCELED", "PENDING"]
 
@@ -26,7 +26,7 @@ def main():
             "Выберите необходимый пункт в меню:\n"
             "1. Получить информацию о транзакциях из JSON-файла.\n"
             "2. Получить информацию о транзакциях из CSV-файла.\n"
-            "3. Получить информацию о транзакциях из XLSX-файла.\n"
+            "3. Получить информацию о транзакциях из XLSX-файла."
         )
         user_input: int = int(input())
         get_func: Callable | None = dict_file.get(user_input)
@@ -52,8 +52,19 @@ def main():
     user_input: bool = input().lower() == "да"
     if user_input:
         print("Отсортировать по возрастанию или по убыванию?")
-    user_sort_reverse: bool = input().lower() == "по убыванию"
-    transaction = sort_by_date(transaction, user_sort_reverse)
+        while True:
+            order = input().strip().lower()
+            if order == "по возрастанию":
+                user_sort_reverse = False
+                print("Операции отсортированы по возрастанию даты.")
+                break
+            elif order == "по убыванию":
+                user_sort_reverse = True
+                print("Операции отсортированы по убыванию даты.")
+                break
+            else:
+                print("Неверный формат ответа. Пожалуйста, введите 'по возрастанию' или 'по убыванию'.")
+        transaction = sort_by_date(transaction, user_sort_reverse)
 
     print("Выводить только рублевые транзакции? Да / Нет ")
     user_input: bool = input().lower() == "да"
@@ -64,11 +75,11 @@ def main():
     user_input: bool = input().lower() == "да"
     if user_input:
         print("Введите слово для фильтрации: ")
-    user_word: str = input()
-    transaction = process_bank_search(transaction, user_word)
+        user_word: str = input()
+        transaction = process_bank_search(transaction, user_word)
 
     print("Распечатываю итоговый список транзакций...")
-    print(f"Всего банковских операций в выборке: {len(transaction)}")
+    print(f"Всего банковских операций в выборке: {len(list(transaction))}")
 
     for trans in transaction:
         date = get_date(trans.get("date"))
