@@ -66,13 +66,6 @@ def main():
                 print("Неверный формат ответа. Пожалуйста, введите 'по возрастанию' или 'по убыванию'.")
         transaction = sort_by_date(transaction, user_sort_reverse)
 
-    # if order in ['по возрастанию', 'по убыванию']:
-    #        user_sort_reverse: bool = input().lower() == "по убыванию"
-    # if user_sort_reverse:
-    # elif  "по возрастанию", user_sort_reverse == False:
-    #     transaction = sort_by_date(transaction, user_sort_reverse)
-
-
     print("Выводить только рублевые транзакции? Да / Нет ")
     user_input: bool = input().lower() == "да"
     if user_input:
